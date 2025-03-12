@@ -1,4 +1,4 @@
-package t2week1;
+
 
 public class excerise1 {
     public static void main(String[] args) {
