@@ -1,7 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
 
-import t2week6.power;
 public class wahatest {
     public static void main(String[] args) {
         Random ranNum = new Random();
@@ -11,7 +10,9 @@ public class wahatest {
         int whileControl1 =1;
         int whileControl2=1;
         String fancy = "";
-        boolean Lethal, DevWo, Sus =false;
+        boolean Lethal=false;
+        boolean DevWo=false;
+        boolean Sus =false;
         /* Data input */
         System.out.print("Enter the amount of models in the attacking unit: ");
         models=input.nextInt();
@@ -62,11 +63,126 @@ public class wahatest {
                 y=ranNum.nextInt(6) + 1;
                 x=ranNum.nextInt(6) + 1;
                 if (y>=bs) {
-                    if (Sus) {
-                        
-                    }
                     System.out.println("Your attack hit! WAAAAGH!!");
-                    if (str==t) {
+                    if (Sus==true && Lethal==true) {
+                        if (y==6) {
+                            System.out.println("Your attack critically hit and automatically wounded AND scores an additional "+susMod+" hits! WAAAGH!!");
+                        }else if (str==t) {
+                        System.out.println("You wound on 4s");
+                            if (x>=4) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if ((str/2)>=t) {
+                            System.out.println("You wound on 2s");
+                            if (x>=2) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if (str>t) {
+                            System.out.println("You wound on 3s");
+                            if (x>=3) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if ((t/2)>=str) {
+                            System.out.println("You wound on 6s");
+                            if (x>=6) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if (t>str) {
+                            System.out.println("You wound on 5s");
+                            if (x>=5) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }
+                    } else if (Sus) {
+                        if (y==6) {
+                            System.out.println("Your attack critically hit and scores an additional "+susMod+" hits! WAAAGH!!");
+                        }
+                        if (str==t) {
+                        System.out.println("You wound on 4s");
+                            if (x>=4) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if ((str/2)>=t) {
+                            System.out.println("You wound on 2s");
+                            if (x>=2) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if (str>t) {
+                            System.out.println("You wound on 3s");
+                            if (x>=3) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if ((t/2)>=str) {
+                            System.out.println("You wound on 6s");
+                            if (x>=6) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }else if (t>str) {
+                            System.out.println("You wound on 5s");
+                            if (x>=5) {
+                                System.out.println("You wound them!");
+                            } else {
+                                System.out.println("You do not wound them");
+                            }
+                        }
+                    } else if (Lethal==true) {
+                            if (y==6) {
+                                System.out.println("Your attack critically hit and automatically wounded! WAAAGH!!");
+                            }else if (str==t) {
+                            System.out.println("You wound on 4s");
+                                if (x>=4) {
+                                    System.out.println("You wound them!");
+                                } else {
+                                    System.out.println("You do not wound them");
+                                }
+                            }else if ((str/2)>=t) {
+                                System.out.println("You wound on 2s");
+                                if (x>=2) {
+                                    System.out.println("You wound them!");
+                                } else {
+                                    System.out.println("You do not wound them");
+                                }
+                            }else if (str>t) {
+                                System.out.println("You wound on 3s");
+                                if (x>=3) {
+                                    System.out.println("You wound them!");
+                                } else {
+                                    System.out.println("You do not wound them");
+                                }
+                            }else if ((t/2)>=str) {
+                                System.out.println("You wound on 6s");
+                                if (x>=6) {
+                                    System.out.println("You wound them!");
+                                } else {
+                                    System.out.println("You do not wound them");
+                                }
+                            }else if (t>str) {
+                                System.out.println("You wound on 5s");
+                                if (x>=5) {
+                                    System.out.println("You wound them!");
+                                } else {
+                                    System.out.println("You do not wound them");
+                                }
+                            }
+                    }else if (str==t) {
                         System.out.println("You wound on 4s");
                         if (x>=4) {
                             System.out.println("You wound them!");
@@ -102,6 +218,7 @@ public class wahatest {
                             System.out.println("You do not wound them");
                         }
                     }
+                
                 } else {
                     System.out.println("Your attack failed to hit. sad waaagh");
                 }
