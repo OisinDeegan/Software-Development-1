@@ -106,6 +106,51 @@ public class wahatest {
                                 System.out.println("You do not wound them");
                             }
                         }
+                        susModCounter=1;
+                        if (susModCounter<=susModTotal) {
+                            while (susModCounter<=susModTotal) {
+                                x=ranNum.nextInt(6) + 1;
+                                System.out.println("Sustained Hit no."+susModCounter);
+                                if (str==t) {
+                                    System.out.println("You wound on 4s");
+                                    if (x>=4) {
+                                        System.out.println("You wound them!");
+                                    } else {
+                                        System.out.println("You do not wound them");
+                                    }
+                                }else if ((str/2)>=t) {
+                                    System.out.println("You wound on 2s");
+                                    if (x>=2) {
+                                        System.out.println("You wound them!");
+                                    } else {
+                                        System.out.println("You do not wound them");
+                                    }
+                                }else if (str>t) {
+                                    System.out.println("You wound on 3s");
+                                    if (x>=3) {
+                                        System.out.println("You wound them!");
+                                    } else {
+                                        System.out.println("You do not wound them");
+                                    }
+                                }else if ((t/2)>=str) {
+                                    System.out.println("You wound on 6s");
+                                    if (x>=6) {
+                                        System.out.println("You wound them!");
+                                    } else {
+                                        System.out.println("You do not wound them");
+                                    }
+                                }else if (t>str) {
+                                    System.out.println("You wound on 5s");
+                                    if (x>=5) {
+                                        System.out.println("You wound them!");
+                                    } else {
+                                        System.out.println("You do not wound them");
+                                    }
+                                }
+                                susModCounter++;
+                            }
+                            susModTotal=0;
+                        }
                     } else if (Sus) {
                         if (y==6) {
                             System.out.println("Your attack critically hit and scores an additional "+susMod+" hits! WAAAGH!!");
@@ -151,6 +196,7 @@ public class wahatest {
                         susModCounter=1;
                         if (susModCounter<=susModTotal) {
                             while (susModCounter<=susModTotal) {
+                                x=ranNum.nextInt(6) + 1;
                                 System.out.println("Sustained Hit no."+susModCounter);
                                 if (str==t) {
                                     System.out.println("You wound on 4s");
@@ -275,9 +321,7 @@ public class wahatest {
                 whileControl1++;
             }
             whileControl2++;
-            
         }
-        
         input.close();
     }
     
