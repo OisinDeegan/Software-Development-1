@@ -18,6 +18,7 @@ public class wahatest {
         int susMod =0;
         int susModCounter=0;
         int save=0;
+        int invSave=0;
         int rend=0;
         int whileControl1 =1;
         int whileControl2=1;
@@ -26,6 +27,7 @@ public class wahatest {
         boolean DevWo=false;
         boolean Sus =false;
         boolean critMortal=false;
+        boolean invuln=false;
         /* Data input */
         System.out.print("Are you playing Age of Sigmar or 40K? (1 for AoS, 2 for 40K): ");
         gameMode=input.nextInt();
@@ -66,8 +68,13 @@ public class wahatest {
                     critMortal=true;
                 }
             }
-            System.out.print("Enter the target unit Save value:");
+            System.out.print("Enter the target unit Save value: ");
             save=input.nextInt();
+            System.out.print("Does the target unit ignore rend? (y/n): ");
+            fancy=input.next();
+            if (fancy.equalsIgnoreCase("y")) {
+                invuln=true;
+            }
                 /* AoS Calculations */
             while (whileControl2<=models) {
                 System.out.println();
@@ -83,6 +90,9 @@ public class wahatest {
                     y=ranNum.nextInt(6) + 1;
                     x=ranNum.nextInt(6) + 1;
                     z=ranNum.nextInt(6) + 1;
+                    if (invuln==true) {
+                        rend=0;
+                    }
                     if (y>=bs) {
                         System.out.println("Your attack hit! WAAAAGH!!");
                         susMod=1;
@@ -209,8 +219,15 @@ public class wahatest {
                 System.out.print("what is the modifier? (e.g. Sustained Hits 1): ");
                 susMod=input.nextInt();
             }
-            System.out.print("Enter the target unit Save value:");
+            System.out.print("Enter the target unit Save value: ");
             save=input.nextInt();
+            System.out.print("Does the target unit have an Invulnerable Save? (y/n): ");
+            fancy=input.next();
+            if (fancy.equalsIgnoreCase("y")) {
+                invuln=true;
+                System.out.print("Enter the target unit Invul. save value: ");
+                invSave=input.nextInt();
+            }
             while (whileControl2<=models) {
                 System.out.println();
                 if (models==1) {
@@ -225,6 +242,10 @@ public class wahatest {
                     y=ranNum.nextInt(6) + 1;
                     x=ranNum.nextInt(6) + 1;
                     z=ranNum.nextInt(6) + 1;
+                    if ((save+rend)>=invSave) {
+                        rend=0;
+                        save=invSave;
+                    }
                     if (y>=bs) {
                         System.out.println("Your attack hit! WAAAAGH!!");
                         if (Sus==true && Lethal==true) {
