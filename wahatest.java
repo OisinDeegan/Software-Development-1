@@ -6,7 +6,7 @@ public class wahatest {
         Random ranNum = new Random();
         Scanner input= new Scanner(System.in);
         /* Setting up variables */
-        int x, y=0;
+        int x, y, z=0;
         int bs =0;
         int str =0;
         int t=0;
@@ -17,6 +17,8 @@ public class wahatest {
         int gameMode =0;
         int susMod =0;
         int susModCounter=0;
+        int save=0;
+        int rend=0;
         int whileControl1 =1;
         int whileControl2=1;
         String fancy = "";
@@ -43,6 +45,8 @@ public class wahatest {
             bs=input.nextInt();
             System.out.print("Enter the to wound value: ");
             ws=input.nextInt();
+            System.out.print("Enter the rend value: ");
+            rend=input.nextInt();
             System.out.print("Does the attack have any special effects? (y/n to open selection): ");
             fancy=input.next();
             if (fancy.equalsIgnoreCase("y")) {
@@ -62,6 +66,8 @@ public class wahatest {
                     critMortal=true;
                 }
             }
+            System.out.print("Enter the target unit Save value:");
+            save=input.nextInt();
                 /* AoS Calculations */
             while (whileControl2<=models) {
                 System.out.println();
@@ -76,6 +82,7 @@ public class wahatest {
                     System.out.println("Attack number "+whileControl1);
                     y=ranNum.nextInt(6) + 1;
                     x=ranNum.nextInt(6) + 1;
+                    z=ranNum.nextInt(6) + 1;
                     if (y>=bs) {
                         System.out.println("Your attack hit! WAAAAGH!!");
                         susMod=1;
@@ -86,6 +93,11 @@ public class wahatest {
                             }
                             if (x>=ws) {
                                 System.out.println("With a roll of "+x+" you wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("With a roll of "+x+" you do not wound them");
                             }
@@ -94,9 +106,15 @@ public class wahatest {
                             if (susModCounter<=susModTotal) {
                                 while (susModCounter<=susModTotal) {
                                     x=ranNum.nextInt(6) + 1;
+                                    z=ranNum.nextInt(6) + 1;
                                     System.out.println("Addtional hit no."+susModCounter);
                                     if (x>=ws) {
                                         System.out.println("With a roll of "+x+" you wound them!");
+                                        if (z>=(save+rend)) {
+                                            System.out.println("With a saving throw of "+z+" they make their save.");
+                                        } else {
+                                            System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                        }
                                     } else {
                                         System.out.println("With a roll of "+x+" you do not wound them");
                                     }
@@ -107,8 +125,18 @@ public class wahatest {
                         } else if (Lethal==true) {
                             if (y==6) {
                                 System.out.println("Your attack critically hit and automatically wounded! WAAAGH!!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             }else if (x>=ws) {
                                 System.out.println("With a roll of "+x+" you wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("With a roll of "+x+" you do not wound them");
                             }
@@ -117,6 +145,11 @@ public class wahatest {
                                 System.out.println("Your attack critically hit and automatically deals Mortal WOUNDS!! WAAAGH!!");
                             }else if (x>=ws) {
                                 System.out.println("With a roll of "+x+" you wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("With a roll of "+x+" you do not wound them");
                             }
@@ -124,6 +157,11 @@ public class wahatest {
                         /*normal rolls */
                         if (x>=ws) {
                             System.out.println("With a roll of "+x+" you wound them!");
+                            if (z>=(save+rend)) {
+                                System.out.println("With a saving throw of "+z+" they make their save.");
+                            } else {
+                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                            }
                         } else {
                             System.out.println("With a roll of "+x+" you do not wound them");
                         }
@@ -146,6 +184,8 @@ public class wahatest {
             str=input.nextInt();
             System.out.print("Enter the toughness of your opponent: ");
             t=input.nextInt();
+            System.out.print("Enter the AP value: ");
+            rend=input.nextInt();
             System.out.print("Does the attack have any special effects? (y/n to open selection): ");
             fancy=input.next();
             if (fancy.equalsIgnoreCase("y")) {
@@ -169,6 +209,8 @@ public class wahatest {
                 System.out.print("what is the modifier? (e.g. Sustained Hits 1): ");
                 susMod=input.nextInt();
             }
+            System.out.print("Enter the target unit Save value:");
+            save=input.nextInt();
             while (whileControl2<=models) {
                 System.out.println();
                 if (models==1) {
@@ -182,44 +224,85 @@ public class wahatest {
                     System.out.println("Attack number "+whileControl1);
                     y=ranNum.nextInt(6) + 1;
                     x=ranNum.nextInt(6) + 1;
+                    z=ranNum.nextInt(6) + 1;
                     if (y>=bs) {
                         System.out.println("Your attack hit! WAAAAGH!!");
                         if (Sus==true && Lethal==true) {
                             if (y==6) {
                                 System.out.println("Your attack critically hit and automatically wounded AND scores an additional "+susMod+" hits! WAAAGH!!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                                 susModTotal+=susMod;
                             }else if (str==t) {
                             System.out.println("You wound on 4s");
-                                if (x>=4) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=4) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if ((str/2)>=t) {
                                 System.out.println("You wound on 2s");
-                                if (x>=2) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=2) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if (str>t) {
                                 System.out.println("You wound on 3s");
-                                if (x>=3) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=3) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if ((t/2)>=str) {
                                 System.out.println("You wound on 6s");
-                                if (x>=6) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=6) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if (t>str) {
                                 System.out.println("You wound on 5s");
-                                if (x>=5) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=5) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
@@ -228,39 +311,75 @@ public class wahatest {
                             if (susModCounter<=susModTotal) {
                                 while (susModCounter<=susModTotal) {
                                     x=ranNum.nextInt(6) + 1;
+                                    z=ranNum.nextInt(6) + 1;
                                     System.out.println("Sustained Hit no."+susModCounter);
                                     if (str==t) {
                                         System.out.println("You wound on 4s");
-                                        if (x>=4) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=4) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if ((str/2)>=t) {
                                         System.out.println("You wound on 2s");
-                                        if (x>=2) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=2) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if (str>t) {
                                         System.out.println("You wound on 3s");
-                                        if (x>=3) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=3) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if ((t/2)>=str) {
                                         System.out.println("You wound on 6s");
-                                        if (x>=6) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=6) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if (t>str) {
                                         System.out.println("You wound on 5s");
-                                        if (x>=5) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=5) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
@@ -276,36 +395,71 @@ public class wahatest {
                             }
                             if (str==t) {
                             System.out.println("You wound on 4s");
-                                if (x>=4) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=4) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if ((str/2)>=t) {
                                 System.out.println("You wound on 2s");
-                                if (x>=2) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=2) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if (str>t) {
                                 System.out.println("You wound on 3s");
-                                if (x>=3) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=3) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if ((t/2)>=str) {
                                 System.out.println("You wound on 6s");
-                                if (x>=6) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=6) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
                             }else if (t>str) {
                                 System.out.println("You wound on 5s");
-                                if (x>=5) {
+                                if (DevWo==true && x==6) {
+                                    System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                } else if (x>=5) {
                                     System.out.println("You wound them!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 } else {
                                     System.out.println("You do not wound them");
                                 }
@@ -315,39 +469,75 @@ public class wahatest {
                             if (susModCounter<=susModTotal) {
                                 while (susModCounter<=susModTotal) {
                                     x=ranNum.nextInt(6) + 1;
+                                    z=ranNum.nextInt(6) + 1;
                                     System.out.println("Sustained Hit no."+susModCounter);
                                     if (str==t) {
                                         System.out.println("You wound on 4s");
-                                        if (x>=4) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=4) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if ((str/2)>=t) {
                                         System.out.println("You wound on 2s");
-                                        if (x>=2) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=2) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if (str>t) {
                                         System.out.println("You wound on 3s");
-                                        if (x>=3) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=3) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if ((t/2)>=str) {
                                         System.out.println("You wound on 6s");
-                                        if (x>=6) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=6) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
                                     }else if (t>str) {
                                         System.out.println("You wound on 5s");
-                                        if (x>=5) {
+                                        if (DevWo==true && x==6) {
+                                            System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                        } else if (x>=5) {
                                             System.out.println("You wound them!");
+                                            if (z>=(save+rend)) {
+                                                System.out.println("With a saving throw of "+z+" they make their save.");
+                                            } else {
+                                                System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                            }
                                         } else {
                                             System.out.println("You do not wound them");
                                         }
@@ -359,74 +549,149 @@ public class wahatest {
                         } else if (Lethal==true) {
                                 if (y==6) {
                                     System.out.println("Your attack critically hit and automatically wounded! WAAAGH!!");
+                                    if (z>=(save+rend)) {
+                                        System.out.println("With a saving throw of "+z+" they make their save.");
+                                    } else {
+                                        System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                    }
                                 }else if (str==t) {
                                     System.out.println("You wound on 4s");
-                                    if (x>=4) {
+                                    if (DevWo==true && x==6) {
+                                        System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                    } else if (x>=4) {
                                         System.out.println("You wound them!");
+                                        if (z>=(save+rend)) {
+                                            System.out.println("With a saving throw of "+z+" they make their save.");
+                                        } else {
+                                            System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                        }
                                     } else {
                                         System.out.println("You do not wound them");
                                     }
                                 }else if ((str/2)>=t) {
                                     System.out.println("You wound on 2s");
-                                    if (x>=2) {
+                                    if (DevWo==true && x==6) {
+                                        System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                    } else if (x>=2) {
                                         System.out.println("You wound them!");
+                                        if (z>=(save+rend)) {
+                                            System.out.println("With a saving throw of "+z+" they make their save.");
+                                        } else {
+                                            System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                        }
                                     } else {
                                         System.out.println("You do not wound them");
                                     }
                                 }else if (str>t) {
                                     System.out.println("You wound on 3s");
-                                    if (x>=3) {
+                                    if (DevWo==true && x==6) {
+                                        System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                    } else if (x>=3) {
                                         System.out.println("You wound them!");
+                                        if (z>=(save+rend)) {
+                                            System.out.println("With a saving throw of "+z+" they make their save.");
+                                        } else {
+                                            System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                        }
                                     } else {
                                         System.out.println("You do not wound them");
                                     }
                                 }else if ((t/2)>=str) {
                                     System.out.println("You wound on 6s");
-                                    if (x>=6) {
+                                    if (DevWo==true && x==6) {
+                                        System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                    } else if (x>=6) {
                                         System.out.println("You wound them!");
+                                        if (z>=(save+rend)) {
+                                            System.out.println("With a saving throw of "+z+" they make their save.");
+                                        } else {
+                                            System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                        }
                                     } else {
                                         System.out.println("You do not wound them");
                                     }
                                 }else if (t>str) {
                                     System.out.println("You wound on 5s");
-                                    if (x>=5) {
+                                    if (DevWo==true && x==6) {
+                                        System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                                    } else if (x>=5) {
                                         System.out.println("You wound them!");
+                                        if (z>=(save+rend)) {
+                                            System.out.println("With a saving throw of "+z+" they make their save.");
+                                        } else {
+                                            System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                        }
                                     } else {
                                         System.out.println("You do not wound them");
                                     }
                                 }
                         }else if (str==t) {
                             System.out.println("You wound on 4s");
-                            if (x>=4) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=4) {
                                 System.out.println("You wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("You do not wound them");
                             }
                         }else if ((str/2)>=t) {
                             System.out.println("You wound on 2s");
-                            if (x>=2) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=2) {
                                 System.out.println("You wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("You do not wound them");
                             }
                         }else if (str>t) {
                             System.out.println("You wound on 3s");
-                            if (x>=3) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=3) {
                                 System.out.println("You wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("You do not wound them");
                             }
                         }else if ((t/2)>=str) {
                             System.out.println("You wound on 6s");
-                            if (x>=6) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=6) {
                                 System.out.println("You wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("You do not wound them");
                             }
                         }else if (t>str) {
                             System.out.println("You wound on 5s");
-                            if (x>=5) {
+                            if (DevWo==true && x==6) {
+                                System.out.println("You critically wound and they cannot make a saving throw!! WAAGH!!");
+                            } else if (x>=5) {
                                 System.out.println("You wound them!");
+                                if (z>=(save+rend)) {
+                                    System.out.println("With a saving throw of "+z+" they make their save.");
+                                } else {
+                                    System.out.println("With a saving throw of "+z+" your attack makes it through! WAAAGH!!");
+                                }
                             } else {
                                 System.out.println("You do not wound them");
                             }
