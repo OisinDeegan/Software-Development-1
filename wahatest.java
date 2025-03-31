@@ -18,7 +18,7 @@ public class wahatest {
         int susMod =0;
         int susModCounter=0;
         int save=0;
-        int invSave=0;
+        int invSave=10;
         int rend=0;
         int whileControl1 =1;
         int whileControl2=1;
@@ -242,9 +242,11 @@ public class wahatest {
                     y=ranNum.nextInt(6) + 1;
                     x=ranNum.nextInt(6) + 1;
                     z=ranNum.nextInt(6) + 1;
-                    if ((save+rend)>=invSave) {
-                        rend=0;
-                        save=invSave;
+                    if (invuln==true) {
+                        if ((save+rend)>=invSave) {
+                            rend=0;
+                            save=invSave;
+                        }
                     }
                     if (y>=bs) {
                         System.out.println("Your attack hit! WAAAAGH!!");
